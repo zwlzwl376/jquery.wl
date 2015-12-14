@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="../jquery.2.14.min.js"></script>
+<style type="text/css">
+	#myCanvas{background:#000;}
+</style>
+<script type="text/javascript">
+	var pagejs = {
+		
+		init:function(){
+			pagejs.innerMap();
+			$("#myCanvas").mousedown(function(){
+				$(this).bind("mousemove",function(e){
+					pagejs.addMap(e.pageX - $(this).offset().left,e.pageY - $(this).offset().top);
+				});
+			});
+			
+			$("#myCanvas").mouseup(function(){
+				$(this).unbind("mousemove");
+				pagejs.addEnd();
+			});
+		},
+		
+		//初始化
+		innerMap:function (){
+			$("#title").click(function(){
+				$("#myCanvas").fadeToggle();
+			});
+		},
+		
+		//结束
+		addEnd:function(){
+			var cxt = pagejs.draw();
+			cxt.stroke();
+			pagejs.start = 0;
+		},
+		
+		//开始
+		start:0,
+		
+		//画笔画点
+		addMap:function(x,y){
+			var cxt = pagejs.draw();
+			cxt.strokeStyle = "#fff";
+			if(pagejs.start == 0){
+				cxt.moveTo(x,y);
+			}else{
+				cxt.lineTo(x,y);
+				cxt.stroke();
+			}
+			pagejs.start++
+		},
+		
+		//获取画笔
+		draw:function () {
+			var canvas = document.getElementById("myCanvas");
+			if (canvas.getContext) { //检测浏览器是否兼容
+				ctx = canvas.getContext("2d"); //你的canvas代码在这里
+				return ctx;
+			}
+			return null;
+		}
+	}
+</script>
+</head>
+<body>
+	<center>
+		<div id="title">HTML5《画板测试》</div>
+		<canvas id="myCanvas" width="1024" height="500" style="border:1px solid #c3c3c3;" draggable="false" ondragstart="pagejs.drag(event)">
+			Your browser does not support the canvas element.
+		</canvas>
+	</center>
+<script type="text/javascript">
+	$(document).ready(function(){
+		pagejs.init();
+	});
+</script>
+</body>
+</html>

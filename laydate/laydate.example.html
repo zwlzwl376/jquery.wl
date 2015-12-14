@@ -1,0 +1,28 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>layDate Demo</title>
+<script src="laydate/laydate.dev.js"></script>
+<style type="text/css">
+	ul li{list-style:none;}
+</style>
+</head>
+<body>
+	<div style="width:970px; margin:10px auto;">
+		<ul>
+			<li>年月日:<input placeholder="YYYY-MM-DD" class="laydate-icon" onclick="laydate()"/></li>
+			<li>&nbsp;</li>
+			<li>年月日时分秒<input placeholder="YYYY-MM-DD hh:mm:ss" class="laydate-icon" onclick="laydate({istime:true, format:'YYYY-MM-DD hh:mm:ss'})"/></li>
+			<li>&nbsp;</li>
+			<li>开始:<input placeholder="YYYY-MM-DD" class="laydate-icon" onclick="laydate({min: laydate.now(-1),max: laydate.now(+1)})" /></li>
+			<li>&nbsp;</li>
+			<li>年月:<input placeholder="YYYY-MM" class="laydate-icon" onclick="laydate({format:'YYYY-MM'})" /></li>
+			<li>&nbsp;</li>
+			<div class="time">
+				<li>年月:<input placeholder="hh:mm:ss" class="laydate-icon" onclick="laydate({istime:true, format:'hh:mm:ss'})" /></li>
+			</div>
+		</ul>
+	</div>
+</body>
+</html>

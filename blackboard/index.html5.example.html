@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<script src="../jquery.2.14.min.js"></script>
+<style type="text/css">
+	.img-div {width:488px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+</style>
+<script type="text/javascript">
+var pagejs = {
+	init:function(){
+		pagejs.innerMap();
+	},
+	//移动
+	allowDrop:function (ev){
+		ev.preventDefault();
+	},
+	//点下
+	drag:function drag(ev){
+		ev.dataTransfer.setData("Text",ev.target.id);
+	},
+	//按住
+	drop:function (ev){
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("Text");
+		ev.target.appendChild(document.getElementById(data));
+	},
+	//初始化
+	innerMap:function (){
+		var c = document.getElementById("myCanvas");
+		var cxt = c.getContext("2d");
+
+		//渐变
+		var grd = cxt.createLinearGradient(0,0,180,80);
+		grd.addColorStop(0,"#999");
+		grd.addColorStop(1,"#ccc");
+		cxt.fillStyle = grd;
+		cxt.fillRect(0,0,180,80);
+			
+		//画圆
+		cxt.fillStyle = "#FF9900";
+		cxt.beginPath();
+		cxt.arc(70,18,15,0,Math.PI*2,true);
+		cxt.closePath();
+		cxt.fill();
+
+		//画线
+		cxt.moveTo(0,0);
+/*
+		cxt.lineTo(200,20);
+		cxt.lineTo(0,40);
+		cxt.lineTo(200,60);
+		cxt.lineTo(0,80);
+		cxt.lineTo(200,100);
+*/
+		cxt.stroke();
+
+		//画花
+		var img = new Image();
+		img.src = "file:///C:/Users/VIPKID/Desktop/eg_flower.png";
+	},
+	appMap:function(x,y){
+		var c = document.getElementById("myCanvas");
+		var cxt = c.getContext("2d");
+		cxt.lineTo(x,y);
+		cxt.stroke();
+	}
+}
+</script>
+<form>
+	<div>
+		<video width="320" height="240" controls="controls">
+		  <source src="http://resource.vipkid.com.cn/video/tr/teacher_MP4_AVC_AAC_640x480_20150326103726.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+		</video>
+		
+		<audio src="http://resource.vipkid.com.cn/video/tr/teacher_MP4_AVC_AAC_640x480_20150326103726.mp4" controls="controls">Your browser does not support the audio element.</audio>
+		
+		<div>
+			date:<input id="date" type="date" name="date" maxLength="100"/>
+			time:<input id="time" type="time" name="time" maxLength="100"/>
+			calendar:<input id="calendar" type="calendar" name="calendar" maxLength="100"/>
+			email:<input id="email" type="email" name="email" maxLength="100"/>
+			url:<input id="url" type="url" name="url" maxLength="100"/>
+			search:<input id="search" type="search" name="search" maxLength="100"/>
+			Points: <input type="number" name="number" min="1" max="10" />
+			points:<input type="range" name="points" min="1" max="10" />
+		</div>
+		Webpage: <input type="url" list="url_list" name="link" />
+				<datalist id="url_list">
+					<option label="W3School" value="http://www.w3school.com.cn" />
+					<option label="Google" value="http://www.google.com" />
+					<option label="Microsoft" value="http://www.microsoft.com" />
+				</datalist>
+		<input type="submit" value="提交" />
+	</div>
+	
+
+	<p>W3School</p>
+	
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+	  <polygon points="100,10 40,180 190,60 10,60 160,180"
+	  style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+	</svg>
+	
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+	  <polygon points="100,10 10,60 40,180 160,180 190,60"
+	  style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+	</svg>
+
+	<div id="div1" class="img-div" ondrop="pagejs.drop(event)" ondragover="pagejs.allowDrop(event)"></div>
+	<div id="div2" class="img-div" ondrop="pagejs.drop(event)" ondragover="pagejs.allowDrop(event)"></div>
+	<br />
+	<img id="drag1" src="http://www.w3school.com.cn/i/w3school_banner.gif" draggable="true" ondragstart="pagejs.drag(event)" />
+		
+	<canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;" draggable="true" ondragstart="pagejs.drag(event)">
+		Your browser does not support the canvas element.
+	</canvas>
+	
+	<div id="result"></div>
+	
+	<input type="button" value="add" onclick="pagejs.appMap(200,50);">
+	<script type="text/javascript">
+	$(document).ready(function(){
+		pagejs.init();
+	});
+	</script>
+</form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Loading Page</title>
+<script src="../jquery.2.14.min.js"></script>
+<script src="jquery.countdown.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#time").countdown({
+			scheduleTime:'2010-01-01 00:00:00',
+			serverTime: '2010-01-01 00:59:55',
+			intoclass:"goToClassroomBtn",
+			cancel:"cancel-a-font"
+		});
+	});
+</script>
+</head>
+<body>
+<div style="background:green;height:1600px;width:100%;padding:20px;">
+	<div id="time"></div><div class="cancel-a-font">111111111</div>
+	<input id="goToClassroomBtn" type="button" value=" 加 载 ">
+</div>
+</body>
+</html>

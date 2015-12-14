@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Loading Page</title>
+<script src="../jquery.2.14.min.js"></script>
+<script src="jquery.loading.js"></script>
+<link rel="stylesheet" href="jquery.loading.css" type="text/css">
+<script>
+	$(document).ready(function(){
+	
+		$("#red-button").click(function(){
+			//打开
+			var id = "red-loading";
+			$("#red").loading({action:"open",id:id,font:10});
+			var time = setTimeout(function(){
+				//关闭
+				$("#red").loading({action:"close",id:id});
+			},5000);
+		});
+		
+		$("#yellow-button").click(function(){
+			//打开
+			var id = "yellow-loading";
+			$("#yellow").loading({action:"open",id:id,font:20});
+			var time = setTimeout(function(){
+				//关闭
+				$("#yellow").loading({action:"close",id:id});
+			},5000);
+		});
+		
+		$("#body-button").click(function(){
+			//打开
+			var id = "body-loading";
+			$(window).loading({action:"open",id:id,font:40});
+			var time = setTimeout(function(){
+				//关闭
+				$(window).loading({action:"close",id:id});
+			},5000);
+		});
+	});
+</script>
+</head>
+<body>
+<div style="background:green;height:1600px;width:100%;margin:0px;">
+	<div style="padding:20px;">
+	sssh
+	<input id="red-button" type="button" value=" 加 载 RED">
+	<input id="yellow-button" type="button" value=" 加 载 yellow">
+	<input id="body-button" type="button" value=" 加 载 body">
+	</div>
+	<div id="red" style="height:300px;width:50%;background:red;padding:10px;">
+		测试~~~
+	</div>
+	<div id="yellow" style="height:300px;width:50%;background:yellow;margin:20px;">
+		测试~~~
+	</div>
+</div>
+</body>
+</html>
