@@ -1,7 +1,5 @@
 /**
- * Author:ZengWeilong Version 1.3 例: var loadingId = "body-loading"; 
- * $(window).loading({action:"open",id:loadingId});打开
- * $(window).loading({action:"close",id:loadingId});关闭
+ * Author:ZengWeilong Version 1.4
  * V1.4
  */
 (function() {
