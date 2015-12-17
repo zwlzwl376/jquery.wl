@@ -33,7 +33,7 @@
 			info : function(style) {
 				if ($("#alert-msg").html()) $("#alert-msg").remove();
 				$("body").append("<div id='alert-msg' class='alert alert-"+style+" fade in hides'><strong>"+json.title+"</strong>"+ json.content + "</div>");
-				$("#alert-msg").fadeIn(200, function() {
+				$("#alert-msg").delay(100).fadeIn(200, function() {
 					alert_timeoutId = setTimeout(function() {
 						$("#alert-msg").fadeOut().remove();
 					}, 6000);
