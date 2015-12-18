@@ -9,7 +9,6 @@
 			dataType : "html",
 			type : "POST"
 		}
-		
 		$.extend(settings, options);
 		
 		var callbacks = {
@@ -23,6 +22,7 @@
 				}
 			}
 		};
+		$.extend(callbacks, options);
 
 		/* 扩展增强处理 */
 		var _opt = $.extend(settings, {
