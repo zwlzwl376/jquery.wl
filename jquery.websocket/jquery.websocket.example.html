@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WebSocket Chat</title>
+<script src="../jquery.2.14.min.js"></script>
+<script src="../jquery.json-2.2.min.js"></script>
+<script src="jquery.websocket.js"></script>
+</head>
+<body>
+<h1>WebSocket Chat</h1>
+<section id="content"></section>
+<input id="message" type="text"/>
+<script>
+$(document).ready(function(){
+	var ws = $.websocket("ws://127.0.0.1:8080/", {
+		events: {
+			message: function(e) { 
+				$('#content').append(e.data + '<br>');
+			}
+		}
+	});
+	
+	$('#message').change(function(){
+	  ws.send('message', this.value);
+	  this.value = '';
+	});
+});
+</script>
+</body>
+</html>
