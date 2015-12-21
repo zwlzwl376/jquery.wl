@@ -10,6 +10,7 @@
 			scheduleTime:'2010-01-01 00:00:00',
 			intoclass:"goToClassroomBtn",
 			cancel:"cancel-a-font",
+			server:false,
 			getTime:function(str) {
 				str = (str).replace(/-/g, "/");
 				var dates = new Date(str);
@@ -47,6 +48,20 @@
 		var scheduleTime = ops.getTime(ops.scheduleTime);
 		//秒
 		var countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
+		
+		//与服务器同步时间
+		if(json.server){
+			$(window).focus(function(){
+				$.ajax({
+					url:webPath+"/server.json",
+					dataType:"json",
+					success:function(result){
+						serverTime = ops.getTime(result.serverTime);
+						countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
+					}
+				});
+			});
+		}
 		setTimeout(function() {
 			$("."+ops.cancel).show();
 			countSecond--;
