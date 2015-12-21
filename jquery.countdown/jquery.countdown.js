@@ -50,7 +50,7 @@
 		var countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
 		
 		//与服务器同步时间
-		if(json.server){
+		if(ops.server){
 			$(window).focus(function(){
 				$.ajax({
 					url:webPath+"/server.json",
