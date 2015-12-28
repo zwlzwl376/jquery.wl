@@ -7,11 +7,7 @@
 		var settings = {
 			cache : false,
 			dataType : "html",
-			type : "POST"
-		}
-		$.extend(settings, options);
-		
-		var callbacks = {
+			type : "POST",
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 			},
 			success : function(data, textStatus) {
@@ -21,20 +17,23 @@
 					alert("session invalid!");
 				}
 			}
-		};
-		$.extend(callbacks, options);
-
+		}
+		
+		var json = $.extend({},settings, options);
+		
+		$.extend(settings, options);
+		
 		/* 扩展增强处理 */
-		var _opt = $.extend(settings, {
+		var _opt = $.extend(json, {
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				/* 错误方法增强处理 */
-				callbacks.error(XMLHttpRequest, textStatus, errorThrown);
+				settings.error(XMLHttpRequest, textStatus, errorThrown);
 			},
 			success : function(data, textStatus) {
 				/* 成功回调方法增强处理 */
-				callbacks.success(data, textStatus);
+				settings.success(data, textStatus);
 			},
-			statusCode:callbacks.statusCode
+			statusCode:settings.statusCode
 		});
 
 		_ajax(_opt);
