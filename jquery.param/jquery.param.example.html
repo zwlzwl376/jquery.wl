@@ -7,10 +7,18 @@
 <script src="jquery.param.js"></script>
 <script>
 	$(document).ready(function(){
-		alert("{name:"+$.getParam("name") + ",china:" + $.getParam("china")+"}");
+		if($.getParam("name") != null){
+			alert("{name:"+$.getParam("name") + ",china:" + $.getParam("china")+"}");
+		}
+		$("#test").bind("click",function(){
+			location.href=location.host+"?name=zwlzwl376&china=中国";
+		});
 	});
 </script>
 </head>
 <body>
+
+	<input type="button" value="测试URL" id="test"/>
+	
 </body>
 </html>
