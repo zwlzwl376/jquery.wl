@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>jquery例子</title>
+	<script type="text/javascript" src="../jquery.2.14.min.js"></script>
+	<script type="text/javascript" src="jquery.storage.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#setPage").bind('click',function(){
+				$.storage({place:'page',oper:'set',key:'weilong',value:'zengweilong1'});
+			});
+			$("#getPage").bind('click',function(){
+				alert($.storage({place:'page',oper:'get',key:'weilong'}));
+			});
+			$("#removePage").bind('click',function(){
+				$.storage({place:'page',oper:'remove',key:'weilong'});
+			});
+			$("#setSession").bind('click',function(){
+				$.storage({place:'session',oper:'set',key:'weilong',value:'zengweilong2'});
+			});
+			$("#getSession").bind('click',function(){
+				alert($.storage({place:'session',oper:'get',key:'weilong'}));
+			});
+			$("#removeSession").bind('click',function(){
+				$.storage({place:'session',oper:'remove',key:'weilong'});
+			});
+			$("#setLocal").bind('click',function(){
+				$.storage({place:'local',oper:'set',key:'weilong',value:'zengweilong3'});
+			});
+			$("#getLocal").bind('click',function(){
+				alert($.storage({place:'local',oper:'get',key:'weilong'}));
+			});
+			$("#removeLocal").bind('click',function(){
+				$.storage({place:'local',oper:'remove',key:'weilong'});
+			});
+        });
+	</script>
+  </head>
+  <body>
+	<input id="setPage" type="button" value="setPage"/>
+	<input id="getPage" type="button" value="getPage"/>
+	<input id="removePage" type="button" value="removePage"/>
+	
+	<input id="setSession" type="button" value="setSession"/>
+	<input id="getSession" type="button" value="getSession"/>
+	<input id="removeSession" type="button" value="removeSession"/>
+	
+	<input id="setLocal" type="button" value="setLocal"/>
+	<input id="getLocal" type="button" value="getLocal"/>
+	<input id="removeLocal" type="button" value="removeLocal"/>
+  </body>
+</html>
