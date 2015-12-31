@@ -11,7 +11,7 @@
 			title:" Attach File ",
 			showlength:25
 		}
-		var json = $.extend(def,options);
+		var json = $.extend({},def,options);
 		var randid = ((Math.random()*100000)+"").substring(0,5);
 		var buttonStyle = "text-decoration: none;padding:5px;background:#f5f5f5; border:#eee 1px solid;border-radius: 4px; color: #f00;display:block;text-align: center;cursor:pointer;float:left;";
 		var html = "<a id='button"+randid+"' href='javascript:;' style='"+buttonStyle+"height:"+(json.height-11)+"px;width:"+(json.width-11)+"px;margin-right:10px;'>"+json.title+"</a><span style='line-height:"+json.height+"px;' id='span"+randid+"'>No file attached</span>";

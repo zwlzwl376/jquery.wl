@@ -17,7 +17,7 @@
 			font:10,
 			position : "absolute" /*fixed 固定绝对位置 absolute相对位置*/
 		};
-		var json = $.extend(dfault, options);
+		var json = $.extend({},dfault, options);
 
 		if (json.id == null)
 			return;

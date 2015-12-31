@@ -22,7 +22,7 @@
 			content:"This is your message",
 			width:400
 		};
-		var json = $.extend(dfault, options);
+		var json = $.extend({},dfault, options);
 		
 		if (alert_timeoutId) {
 			clearTimeout(alert_timeoutId);

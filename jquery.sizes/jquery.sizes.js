@@ -4,15 +4,15 @@
  */
 (function() {
 	$.fn.sizes = function(options) {
-		var json = {};
 		var dfault = {
 			size:15,
 			content:'...'
 		};
-		json = $.extend(json,dfault, options);
+		var json = $.extend({},dfault, options);
 		var text = $.trim($(this).html());
 		var size = text.length;
 		if(size > json.size){
+			$(this).attr("title",text);
 			var jclen = json.content.length;
 			text = text.substring(0,(json.size-jclen)) + json.content;
 		}

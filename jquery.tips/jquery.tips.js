@@ -11,7 +11,7 @@
 			font:14
 		};
 		
-		var json = $.extend(dfault, options);
+		var json = $.extend({}, dfault, options);
 		
 		var timeout;			
 		

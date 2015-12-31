@@ -20,7 +20,7 @@
 			}
 		});
 		
-		var json = $.extend(def,options);
+		var json = $.extend({},def,options);
 		
 		if(json.filed){
 			var elementId = $(this).attr("id");

@@ -42,51 +42,51 @@
 				}
 			}
 		};
-		var ops = $.extend(dfault,options);
+		var json = $.extend({},dfault,options);
 		var elementId = $(this).attr("id");
-		var serverTime = ops.getTime(ops.serverTime);
-		var scheduleTime = ops.getTime(ops.scheduleTime);
+		var serverTime = json.getTime(json.serverTime);
+		var scheduleTime = json.getTime(json.scheduleTime);
 		//秒
 		var countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
 		
 		//与服务器同步时间
-		if(ops.server){
+		if(json.server){
 			$(window).focus(function(){
 				$.ajax({
 					url:webPath+"/server.json",
 					dataType:"json",
 					success:function(result){
-						serverTime = ops.getTime(result.serverTime);
+						serverTime = json.getTime(result.serverTime);
 						countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
 					}
 				});
 			});
 		}
 		setTimeout(function() {
-			$("."+ops.cancel).show();
+			$("."+json.cancel).show();
 			countSecond--;
 			//迟到小于1个小时
 			if(-60*60 <= countSecond){
 				//课前30分钟
 				if(countSecond < 30*60){
 					//可进入教室
-					$("#"+ops.intoclass).attr("class","orange ui button");
+					$("#"+json.intoclass).attr("class","orange ui button");
 					if(countSecond <= 0){
 						//不能取消课程
-						$("."+ops.cancel).remove();
+						$("."+json.cancel).remove();
 					}
 				//离上课时间大于30分钟
 				}else{
 					//放开可进入教室
-					$("#"+ops.intoclass).attr("class","orange ui button");
+					$("#"+json.intoclass).attr("class","orange ui button");
 				}
-				$("#"+elementId).html(ops.countfun(countSecond));
+				$("#"+elementId).html(json.countfun(countSecond));
 			//迟到大于1个小时，课程结束
 			}else{
 				//不能取消课程
-				$("."+ops.cancel).remove();
+				$("."+json.cancel).remove();
 				$("#"+elementId).html("Class Over.");
-				$("#"+ops.intoclass).attr("class","orange ui button disabled");
+				$("#"+json.intoclass).attr("class","orange ui button disabled");
 			}
 			setTimeout(arguments.callee, 1000);
 		}, 1000);

@@ -16,9 +16,9 @@
 			return "success";
 		}
 	};
-	var ops = $.extend(dfault,options);
+	var json = $.extend({},dfault,options);
 	var tableId = $(this).attr("id");
-	var tdcount = ops.tdcount;
+	var tdcount = json.tdcount;
 	//Ôö¼Ó¼àÌý
 	$("#"+tableId+" td").click(function(){
 		if(!$(this).attr("booked")){
@@ -34,15 +34,15 @@
 			}
 			//Ñ¡Ôñ
 			if(!$(this).find("div.base-class").attr("style")){
-				if(ops.checked() == "success"){				
-					var div = "<div class='base-class' style='z-index:100;width:"+width+"px;height:"+height+"px;line-height:"+height+"px;position: absolute;left:"+left+"px;top:"+top+"px'>"+ops.content+"</div>";
+				if(json.checked() == "success"){				
+					var div = "<div class='base-class' style='z-index:100;width:"+width+"px;height:"+height+"px;line-height:"+height+"px;position: absolute;left:"+left+"px;top:"+top+"px'>"+json.content+"</div>";
 					$(this).append(div);
 					for(var i = 0; i < tds.length; i++){
 						$(tds[i]).attr("booked","true");
 					}
 				}
 			}else{
-				if(ops.cancel() == "success"){
+				if(json.cancel() == "success"){
 					for(var i = 0; i < tds.length; i++){
 						$(tds[i]).removeAttr("booked");
 					}
