@@ -4,91 +4,89 @@
  **/
 (function ($) {
 	$.fn.countdown = function(options) {
-		var dfault = {
-			cpBy: "ALong",  
-			serverTime: '2010-01-01 00:00:01',
-			scheduleTime:'2010-01-01 00:00:00',
-			intoclass:"goToClassroomBtn",
-			cancel:"cancel-a-font",
-			server:false,
-			getTime:function(str) {
-				str = (str).replace(/-/g, "/");
-				var dates = new Date(str);
-				var times = dates.getTime();
-				return times;
-			},
-			countfun:function(countSecond) {
+		var setting = {
+			staticTime:'2010-01-01 00:00:00',	/*目标时间*/
+			serverTime: '2010-01-01 00:00:01', 	/*起点时间*/
+			before:1*60,						/*单位秒,计时提前多少秒显示beforeId*/
+			beforeId:"beforeId",				/*倒计时后显示的DemoId*/
+			longtime:1*60,						/*设置计时多长时间显示OVER*/
+			afterId:"afterId",					/*设置计时后要隐藏的DemoId*/
+			server:false,						/*是否同步*/
+			url:"/server.json",					/*同步的URL*/
+			countfun:function(countSecond) {	/*该方法可覆写显示内容，参数为当前计数器值*/			
+				var timeSecond = Math.abs(countSecond);
+				var second = Math.floor(timeSecond % 60);
+				var minite = Math.floor((timeSecond / 60) % 60);
+				var hour = Math.floor((timeSecond / 3600) % 24);
+				var day = Math.floor((timeSecond / 3600) / 24);
 				if(countSecond > 0) {
-					var second = Math.floor(countSecond % 60);
-					var minite = Math.floor((countSecond / 60) % 60);
-					var hour = Math.floor((countSecond / 3600) % 24);
-					var day = Math.floor((countSecond / 3600) / 24);
-					var dayText = " days ";
-					if(day <= 1){dayText=" day ";}
-					var hourText = " hours ";
-					if(hour <= 1){hourText = " hour ";}
-					var miniteText = " minutes ";
-					if(minite <= 1){miniteText = " minute "; }
-					var secondText = " seconds";
-					if(second <= 1){secondText = " second ";}
-					return "Class Time Count Down: " + day + dayText + hour + hourText + minite + miniteText +second + secondText;
+					var dayText = " days ",hourText = " hours ",miniteText = " minutes ",secondText = " seconds";
+					if(day <= 1) dayText=" day ";
+					if(hour <= 1) hourText = " hour ";
+					if(minite <= 1) miniteText = " minute ";
+					if(second <= 1) secondText = " second ";
+					return "CountDown: " + day + dayText + hour + hourText + minite + miniteText +second + secondText;
 				}else{
-					var timeSecond = 0-countSecond;
-					var second = Math.floor(timeSecond % 60);
-					var minite = Math.floor((timeSecond / 60) % 60);
-					var hour = Math.floor((timeSecond / 3600) % 24);
-					var day = Math.floor((timeSecond / 3600) / 24);
-					return "Class Time: " + minite + "':" + second + "\"";
+					return 'StartTime: ' + minite + "':" + second + '"';
 				}
 			}
 		};
-		var json = $.extend({},dfault,options);
-		var elementId = $(this).attr("id");
-		var serverTime = json.getTime(json.serverTime);
-		var scheduleTime = json.getTime(json.scheduleTime);
-		//秒
-		var countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
+		var json = $.extend({},setting,options);
 		
-		//与服务器同步时间
+		/*工具封装*/
+		var util = {
+			show:function(ss,cs){
+				if(ss)$("#"+json.beforeId).show();else $("#"+json.beforeId).hide();
+				if(cs)$("#"+json.afterId).show();else $("#"+json.afterId).hide();
+			},
+			getTime:function(str) {
+				str = str.replace(/-/g, "/");
+				var dates = new Date(str);
+				var times = dates.getTime();
+				return times;
+			}
+		};
+		var elementId = $(this).attr("id");
+		var serverTime = util.getTime(json.serverTime);
+		var staticTime = util.getTime(json.staticTime);
+		/*计算秒差*/
+		var countSecond = (staticTime - serverTime) / 1000;
+		
+		/*服务器时间同步*/
 		if(json.server){
 			$(window).focus(function(){
 				$.ajax({
-					url:webPath+"/server.json",
+					url:json.url,
 					dataType:"json",
 					success:function(result){
-						serverTime = json.getTime(result.serverTime);
-						countSecond = (parseInt(scheduleTime) - parseInt(serverTime)) / 1000;
+						serverTime = util.getTime(result.serverTime);
+						/*重新计算秒差*/
+						countSecond = (staticTime - serverTime) / 1000;
 					}
 				});
 			});
 		}
+		/*倒计时功能*/
 		setTimeout(function() {
-			$("."+json.cancel).show();
 			countSecond--;
-			//迟到小于1个小时
-			if(-60*60 <= countSecond){
-				//课前30分钟
-				if(countSecond < 30*60){
-					//可进入教室
-					$("#"+json.intoclass).attr("class","orange ui button");
-					if(countSecond <= 0){
-						//不能取消课程
-						$("."+json.cancel).remove();
-					}
-				//离上课时间大于30分钟
-				}else{
-					//放开可进入教室
-					$("#"+json.intoclass).attr("class","orange ui button");
+			/*计时在1分钟以内*/
+			if( countSecond  >= (0-json.longtime)){
+				/*大于0小于1分钟全部显示*/
+				util.show(true,true);
+				if(countSecond > json.before){
+					/*离倒计时大于1分钟不可进入,但可取消*/
+					util.show(false,true);
+				}else if(countSecond < 0){
+					/*倒计时开始:不能取消，但可进入*/
+					util.show(true,false);
 				}
 				$("#"+elementId).html(json.countfun(countSecond));
-			//迟到大于1个小时，课程结束
+				setTimeout(arguments.callee, 1000);
 			}else{
-				//不能取消课程
-				$("."+json.cancel).remove();
-				$("#"+elementId).html("Class Over.");
-				$("#"+json.intoclass).attr("class","orange ui button disabled");
+				/*迟到大于1分钟，课程结束*/
+				util.show(true,false);
+				$("#"+elementId).html("OVER");
 			}
-			setTimeout(arguments.callee, 1000);
 		}, 1000);
  }
 })(jQuery);
