@@ -13,12 +13,21 @@
 			afterId:"afterId",					/*设置计时后要隐藏的DemoId*/
 			server:false,						/*是否同步*/
 			url:"/server.json",					/*同步的URL*/
+			format:false,
 			countfun:function(countSecond) {	/*该方法可覆写显示内容，参数为当前计数器值*/			
 				var timeSecond = Math.abs(countSecond);
 				var second = Math.floor(timeSecond % 60);
 				var minite = Math.floor((timeSecond / 60) % 60);
 				var hour = Math.floor((timeSecond / 3600) % 24);
 				var day = Math.floor((timeSecond / 3600) / 24);
+				if(options.format){
+					if(countSecond <= 30 * 60){	
+						/*小于半小时*/
+						return 'Class Time Count Down: ' + minite + "':" + second + '"';
+					}else{/*大于半小时*/
+						return "Class Time: Too early";
+					}
+				}
 				if(countSecond > 0) {
 					var dayText = " days ",hourText = " hours ",miniteText = " minutes ",secondText = " seconds";
 					if(day <= 1) dayText=" day ";
@@ -29,6 +38,7 @@
 				}else{
 					return 'StartTime: ' + minite + "':" + second + '"';
 				}
+				
 			}
 		};
 		var json = $.extend({},setting,options);
