@@ -3,23 +3,14 @@
  * V1.4
  **/
 (function () {	
-
+	
+	//表单初始化
 	$.fn.formUI = function(options){
 		//是否需要回选 false 表示不回选
 		var def = {
 			filed:false
 		}
-		
-		$(".option").click(function(){
-			if($(this).find("input").attr("type") == "radio"){
-				var $radio = $(this).children('input');
-				$radio.prop('checked', !$radio.prop('checked')); 
-				//$radio.prop('checked', true);
-			}else{
-				$(this).find("input").click();
-			}
-		});
-		
+
 		var json = $.extend({},def,options);
 		
 		if(json.filed){
@@ -50,11 +41,12 @@
 		}
 	};
 	
+	//表单验证
 	$.fn.validate = function(options){
 		$(".error").html("");
 		var def = {
 			result:function(msg){},
-			checkMethod:false
+			validator:false
 		}
 		var json = $.extend(def,options);
 		var message = "success";
@@ -63,11 +55,12 @@
 			if(validator){
 				var value = $.trim($(this).val());
 				var jsonTmp = eval("("+validator+")");
+				
 				if(jsonTmp.required != undefined){
 					if(value == ""){
 						message = jsonTmp.required;
-						//if  json.checkMethod == true show error
-						if(json.checkMethod){
+						//if  json.validator == true show error
+						if(json.validator){
 							if($(this).next("span").attr("class") == 'error'){
 								$(this).next("span").html(message);
 							}else{
@@ -78,14 +71,15 @@
 						}
 					}
 				}
+				
 				if(value != "" && jsonTmp.match != undefined){
 					var pattern = new RegExp(jsonTmp.match.pattern);
 					if(!pattern.test(value)){
 						message = "Date format error!";
 						if(jsonTmp.match.message){
 							message = jsonTmp.match.message;
-							//if  json.checkMethod == true show error
-							if(json.checkMethod){
+							//if  json.validator == true show error
+							if(json.validator){
 								if($(this).next("span").attr("class") == 'error'){
 									$(this).next("span").html(message);
 								}else{
@@ -102,6 +96,7 @@
 		json.result(message);
 	};
 	
+	//表单JSON data值
     $.fn.dataJson=function(){  
         var serializeObj={};  
         $(this.serializeArray()).each(function(){ 
@@ -112,5 +107,5 @@
 			}
         });  
         return serializeObj;  
-    };  
+    }; 
 })(jQuery);

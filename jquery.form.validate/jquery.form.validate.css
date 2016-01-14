@@ -1,8 +1,7 @@
 body{background:yellow;}
 .line-row{width:100%;min-height:40px;}
-.line-row  div{min-width:100px;text-align:right;display:inline-table;}
+.line-row  .input-title{min-width:100px;text-align:right;display:inline-table;}
 .line-row input[type='text'],.line-row input[type='password'],.line-row textarea{min-width:170px;width:170px;height:25px;line-height:25px;padding-left:5px;border-radius:4px;}
 .line-row select{height:30px;min-width:178px;width:178px;padding-left:5px;border-radius:4px;}
 .line-row textarea{height:50px;}
-.line-row .option{cursor:pointer;}
-.line-row .error{color:red;margin-left:10px;}
+.line-row .error,[class*=error-]{color:red;margin-left:10px;}
