@@ -8,18 +8,24 @@
 <script>
 	$(document).ready(function(){
 		$("#time").countdown({
-			scheduleTime:'2010-01-01 00:00:00',
-			serverTime: '2010-01-01 00:59:55',
-			intoclass:"goToClassroomBtn",
-			cancel:"cancel-a-font"
+			staticTime:'2010-01-02 01:02:00',
+			serverTime: '2010-01-02 01:00:50',
+			before:1*60,
+			beforeId:"startId",
+			longtime:1*60,
+			afterId:"afterId",
+			countfun:function(s){
+				return s;
+			}
 		});
 	});
 </script>
 </head>
 <body>
 <div style="background:green;height:1600px;width:100%;padding:20px;">
-	<div id="time"></div><div class="cancel-a-font">111111111</div>
-	<input id="goToClassroomBtn" type="button" value=" 加 载 ">
+	<div id="time"></div>
+	<div id="startId" style="display:none;">倒计时提前1分钟的时候，<a href="">进入</a></div>
+	<div id="afterId" style="display:none;">倒计时为0的时候，<a href="">取消</a></div>
 </div>
 </body>
 </html>
