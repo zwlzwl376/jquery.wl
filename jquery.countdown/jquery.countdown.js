@@ -12,6 +12,7 @@
 			longtime:1*60,						/*设置计时多长时间显示OVER*/
 			afterId:"afterId",					/*设置计时后要隐藏的DemoId*/
 			server:false,						/*是否同步*/
+			asynctime:5,						/*同步间隔 默认5秒*/
 			url:"/server.json",					/*同步的URL*/
 			format:false,
 			countfun:function(countSecond) {	/*该方法可覆写显示内容，参数为当前计数器值*/			
@@ -52,28 +53,32 @@
 			getTime:function(str) {
 				str = str.replace(/-/g, "/");
 				var dates = new Date(str);
-				var times = dates.getTime();
+				var times = parseInt(dates.getTime());
 				return times;
+			},
+			asyncTime:function(successfun){
+				$.ajax({
+					url:json.url,
+					dataType:"json",
+					cache: false,
+					success:function(result){
+						successfun(result);
+					}
+				});
 			}
 		};
 		var elementId = $(this).attr("id");
 		var serverTime = util.getTime(json.serverTime);
 		var staticTime = util.getTime(json.staticTime);
 		/*计算秒差*/
-		var countSecond = (staticTime - serverTime) / 1000;
+		var countSecond = parseInt((staticTime - serverTime) / 1000);
 		
 		/*服务器时间同步*/
-		if(json.server){
-			$(window).focus(function(){
-				$.ajax({
-					url:json.url,
-					dataType:"json",
-					success:function(result){
-						serverTime = util.getTime(result.serverTime);
-						/*重新计算秒差*/
-						countSecond = (staticTime - serverTime) / 1000;
-					}
-				});
+		function asyncServer(){
+			util.asyncTime(function(result){
+				serverTime = util.getTime(result.serverTime);
+				/*重新计算秒差*/
+				countSecond = parseInt((staticTime - serverTime) / 1000);
 			});
 		}
 		/*倒计时功能*/
@@ -91,6 +96,10 @@
 					util.show(true,false);
 				}
 				$("#"+elementId).html(json.countfun(countSecond));
+				/*每asynctime秒一次同步*/
+				if(json.server){
+					if(countSecond%json.asynctime == 0) asyncServer();
+				}
 				setTimeout(arguments.callee, 1000);
 			}else{
 				/*迟到大于1分钟，课程结束*/
