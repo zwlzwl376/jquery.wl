@@ -37,7 +37,7 @@
 	</div>
 	<div class="line-row">
 		<div class="input-title">PASSWORD:</div>
-		<input type="password" name="password" validator="{required:'Password is required',match:{pattern:'^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,16}$',message:'Password format error!'}}"/>
+		<input type="password" name="password" placeholder="至少包含一个大写字母和 数字或小写字母"  validator="{required:'Password is required',match:{pattern:'^(?=.*[A-Z].*)(?=.*[0-9].*)|(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$',message:'Password format error!'}}"/>
 	</div>
 	<div class="line-row">
 		<div class="input-title">EMAIL:</div>
