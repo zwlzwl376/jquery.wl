@@ -12,65 +12,75 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#testForm").find("input,textarea,select").each(function(){
-				$(this).pop({content:$(this).attr("name")});
+				$(this).pop({
+					content:$(this).siblings(".input-title").html(),
+					direction:"right" //top  left right bottom
+				});
 			});
         });
 	</script>
 	<style type="text/css">
-		body{
-			font-size:12px;
+		.body-div{
+			width:400px;
+			margin:0 auto!important;
+			padding-top:50px;
+		}
+		.input-title{
+			display:none!important;
 		}
 	</style>
   </head>
   <body>
-	<form id="testForm" method="post">
-		<div class="line-row" id="result"></div>
-		<div class="line-row">
-			<div class="input-title">USERNAME:</div>
-			<input type="text" id="username" name="username" filed="zwlzwl376" validator="{required:'Username is required'}"/>
-		</div>
-		<div class="line-row">
-			<div class="input-title">PASSWORD:</div>
-			<input type="password" id="password" name="password" placeholder="至少包含一个大写字母和 数字或小写字母"  validator="{required:'Password is required',match:{pattern:'^(?=.*[A-Z].*)(?=.*[0-9].*)|(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$',message:'Password format error!'}}"/>
-		</div>
-		<div class="line-row">
-			<div class="input-title">EMAIL:</div>
-			<input type="text" id="email" name="email" filed="zwlzwl376@126.com" validator="{required:'Email is required',match:{pattern:'^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$',message:'Email format error!'}}"//>
-		</div>
-		<div class="line-row">
-			<div class="input-title">SELECT:</div>
-			<select id="select" name="select" filed="1" validator="{required:'Select is required'}">
-				<option value=""></option>
-				<option value="1">一</option>
-				<option value="2">二</option>
-				<option value="3">三</option>
-				<option value="4">四</option>
-			</select>
-		</div>
-		<div class="line-row">
-			<div class="input-title">RADIO:</div>
-			<input id="radio1" type="radio" filed="2" name="radio" value="1" /><label for="radio1">单一</label>
-			<input id="radio2" type="radio" filed="2" name="radio" value="2" /><label for="radio2">单二</label>
-			<input id="radio3" type="radio" filed="2" name="radio" value="3" /><label for="radio3">单三</label>
-			<input id="radio4" type="radio" filed="2" name="radio" value="4" /><label for="radio4">单四</label>
-			<span class="error-radio"></span>
-		</div>
-		<div class="line-row">
-			<div class="input-title">CHECKBOX:</div>
-			<input id="checkbox1" type="checkbox" filed="2,3" name="checkbox" value="1" /><label for="checkbox1">一测试</label>
-			<input id="checkbox2" type="checkbox" filed="2,3" name="checkbox" value="2" /><label for="checkbox2">二测试</label>
-			<input id="checkbox3" type="checkbox" filed="2,3" name="checkbox" value="3" /><label for="checkbox3">三测试</label>
-			<input id="checkbox4" type="checkbox" filed="2,3" name="checkbox" value="4" /><label for="checkbox4">四测试</label>
-			<span class="error-checkbox"></span>
-		</div>
-		<div class="line-row">
-			<div class="input-title">TEXTAREA:</div>
-			<textarea id="textarea" name="textarea" validator="{required:'Textarea is required'}"/>OOOK!</textarea>
-		</div>
-		<div class="line-row">
-			<div class="input-title">&nbsp;</div>
-			<input id="upload-button" type="button" value="submit">
-		</div>
-	</form>
+	<div class="body-div">
+		<form id="testForm" method="post">
+			<div class="line-row" id="result"></div>
+			<div class="line-row">
+				<div class="input-title">USERNAME</div>
+				<input type="text" id="username" name="username" filed="zwlzwl376" validator="{required:'Username is required'}"/>
+			</div>
+			<div class="line-row">
+				<div class="input-title">PASSWORD</div>
+				<input type="password" id="password" name="password" placeholder="至少包含一个大写字母和 数字或小写字母"  validator="{required:'Password is required',match:{pattern:'^(?=.*[A-Z].*)(?=.*[0-9].*)|(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$',message:'Password format error!'}}"/>
+			</div>
+			<div class="line-row">
+				<div class="input-title">EMAIL</div>
+				<input type="text" id="email" name="email" filed="zwlzwl376@126.com" validator="{required:'Email is required',match:{pattern:'^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$',message:'Email format error!'}}"//>
+			</div>
+			<div class="line-row">
+				<div class="input-title">SELECT</div>
+				<select id="select" name="select" filed="1" validator="{required:'Select is required'}">
+					<option value=""></option>
+					<option value="1">一</option>
+					<option value="2">二</option>
+					<option value="3">三</option>
+					<option value="4">四</option>
+				</select>
+			</div>
+			<div class="line-row">
+				<div class="input-title">RADIO</div>
+				<input id="radio1" type="radio" filed="2" name="radio" value="1" /><label for="radio1">单一</label>
+				<input id="radio2" type="radio" filed="2" name="radio" value="2" /><label for="radio2">单二</label>
+				<input id="radio3" type="radio" filed="2" name="radio" value="3" /><label for="radio3">单三</label>
+				<input id="radio4" type="radio" filed="2" name="radio" value="4" /><label for="radio4">单四</label>
+				<span class="error-radio"></span>
+			</div>
+			<div class="line-row">
+				<div class="input-title">CHECKBOX</div>
+				<input id="checkbox1" type="checkbox" filed="2,3" name="checkbox" value="1" /><label for="checkbox1">一测试</label>
+				<input id="checkbox2" type="checkbox" filed="2,3" name="checkbox" value="2" /><label for="checkbox2">二测试</label>
+				<input id="checkbox3" type="checkbox" filed="2,3" name="checkbox" value="3" /><label for="checkbox3">三测试</label>
+				<input id="checkbox4" type="checkbox" filed="2,3" name="checkbox" value="4" /><label for="checkbox4">四测试</label>
+				<span class="error-checkbox"></span>
+			</div>
+			<div class="line-row">
+				<div class="input-title">TEXTAREA</div>
+				<textarea id="textarea" name="textarea" validator="{required:'Textarea is required'}"/>OOOK!</textarea>
+			</div>
+			<div class="line-row">
+				<div class="input-title">SUBMIT</div>
+				<input id="upload-button" type="button" value="submit">
+			</div>
+		</form>
+	</div>
   </body>
 </html>
