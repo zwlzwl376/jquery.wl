@@ -15,3 +15,5 @@ V1.3 优化loading，formvalidate,laydate(收藏)
 V1.4 优化formvalidate，新增增强ajax，基于bootstrap的alert信息提示，新增jquery.websocket.js插件
 
 V1.4.1 优化倒计时与服务器同步
+
+V1.4.2 增加pop插件，兼容左中右气泡
