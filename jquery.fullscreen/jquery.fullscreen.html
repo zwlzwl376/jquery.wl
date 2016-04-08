@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Loading Page</title>
+<script src="../jquery.2.14.min.js"></script>
+<script src="jquery.fullscreen.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#full").click(function(){
+			$("#content").fullscreen({screen:true});
+		});
+		$("#exitFull").click(function(){
+			$("#content").fullscreen({screen:false});
+		});
+	});
+</script>
+</head>
+<body>
+<p><input id="full" type="button" value="全屏"/></p>
+<div id="content" style="background:green;height:300px;width:100%;padding:20px;">
+	<p><input id="exitFull" type="button" value="退出全屏"/></p>
+	<p><img src="http://vipkid2.ngrok.natapp.cn/trpm-web/resources/images/activity/fireball.png"/></p>
+</div>
+</body>
+</html>
