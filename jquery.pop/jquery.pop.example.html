@@ -11,11 +11,13 @@
 	<link rel="stylesheet" href="../jquery.form.validate/jquery.form.validate.css" type="text/css">
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#testForm").find("input,textarea,select").each(function(){
+			$("#testForm").find("input,textarea,select").hover(function(){
 				$(this).pop({
 					content:$(this).siblings(".input-title").html(),
-					direction:"right" //top  left right bottom
+					direction:"left" //top  left right bottom
 				});
+			},function(){
+				$("#body-tips div").hide();
 			});
         });
 	</script>
@@ -82,5 +84,6 @@
 			</div>
 		</form>
 	</div>
+	<div id="body-tips"></div>
   </body>
 </html>
