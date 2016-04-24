@@ -6,11 +6,17 @@
 	$.fn.pop = function(options) {
 		var dfault = {
 			content:"This content",
-			borderColor:"RGB(253,184,163)"
+			borderColor:"RGB(253,184,163)",
+			resize:true
 		};
 		var json = $.extend({},dfault, options);
 		var elementId = $(this).attr("id");
 		var showtips = elementId+"-tips";
+		if(json.resize){
+			$(window).resize(function(){
+				$("."+showtips).remove();
+			});
+		}
 		if($("."+showtips).html() != undefined){
 			$("#body-tips div").hide();
 			$("."+showtips).show();
