@@ -55,7 +55,7 @@
 			},
 			bottom:function(){
 				$("#body-tips").append("<div id='"+showtips+"' class='"+showtips+"'  style='position:absolute;display:none;top:"+top+"px;left:"+left+"px;border: 1px solid "+json.borderColor+";background:#fff;padding:6px;text-align:left;border-radius: 5px;' >"+json.content+"</div>");
-				var rzleft=$("#"+elementId).offset().top + $("#"+elementId).outerHeight() + 5;
+				var rzleft=$("#"+elementId).offset().top + $("#"+elementId).outerHeight()+8;
 				$("#"+showtips).css({"top":rzleft+"px"});
 				var subleft=$("#"+elementId).offset().left + 20;
 				var subtop = rzleft - 16;
