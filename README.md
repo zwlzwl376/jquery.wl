@@ -16,4 +16,18 @@ V1.4 优化formvalidate，新增增强ajax，基于bootstrap的alert信息提示
 
 V1.4.1 优化倒计时与服务器同步
 
-V1.4.2 增加pop插件，兼容左中右气泡
+V1.4.2 增加pop插件，兼容左中右气泡，满屏插件。
+
+
+PS:同步仓库地址
+
+主仓库: https://github.com/zwlzwl376/jquery.wl
+
+副仓库: https://git.oschina.net/zwlzwl376/jquery.wl
+
+副仓库: https://gitlab.com/zwlzwl376/jquery.wl
+
+副仓库: https://code.csdn.net/zwlzwl376/jquery-wl/tree/master
+
+副仓库: https://gitcafe.com/zwlzwl376/jquery.wl
+
