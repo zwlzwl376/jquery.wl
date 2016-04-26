@@ -70,8 +70,10 @@
 		/*left*/
 		}else if("left" == json.direction){
 			core.left();
+		/*top*/
 		}else if("top" == json.direction){
 			core.top();
+		/*bottom*/
 		}else if("bottom" == json.direction){
 			core.bottom();
 		}
