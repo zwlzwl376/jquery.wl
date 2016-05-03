@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>整合uploadView</title>
+<script src="../../jquery.2.14.min.js"></script>
+<script src="../jquery.upload.js"></script>
+<link rel="stylesheet" href="../jquery.upload.css" type="text/css">
+<script src="jquery.uploadView.js"></script>
+<script>
+	$(document).ready(function(){
+		$(".js_upFile").uploadView({
+			uploadBox: '.js_uploadBox',						 //设置上传框容器
+			showBox : '.js_showBox',						 //设置显示预览图片的容器
+			width : 100, 									 //预览图片的宽度，单位px
+			height : 100, 									 //预览图片的高度，单位px
+			allowType: ["gif", "jpeg", "jpg", "bmp", "png"], //允许上传图片的类型
+			maxSize :1, 									 //允许上传图片的最大尺寸，单位M
+			success:function(e){
+				
+			}
+		});
+		$("#uploadReport").fileUI({accept:".gif,.jpeg,.jpg,.bmp,.png",title:"Upload",maxSize:1,showlength:10});	
+	});
+</script>
+</head>
+<body>
+<form id="testForm" method="post" enctype="multipart/form-data">
+
+	<div class="line-row js_uploadBox">
+		<div><input class="js_upFile" id="uploadReport" type="file" name="file"/></div>
+		<div style="height:10px;"></div>
+		<div class="js_showBox"><img class="js_logoBox" src="http://a1.qpic.cn/psb?/V13RURSC1CPqha/3tLOG6T3FtrZqSlKATxGnCtRYgWgYASG7xQkS5AxNGU!/c/dAQBAAAAAAAA&ek=1&kp=1&pt=0&bo=AAIAAgAAAAABACc!&sce=0-12-12&rf=0-18" width="100px" ></div>
+	</div>
+	
+	<div class="line-row">
+		上传进度:<span id="progressId">0%</span>
+	</div>
+	
+	<div class="line-row">
+		<input id="upload-button" type="button" value="submit">
+	</div>
+	
+</form>
+</body>
+</html>
