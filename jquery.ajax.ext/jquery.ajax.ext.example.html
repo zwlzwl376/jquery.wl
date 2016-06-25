@@ -5,18 +5,29 @@
 <script src="../jquery.2.14.min.js"></script>
 <script src="jquery.ajax.ext.js"></script>
 <script>
+	/*跨域请求*/
+	var angularfun=function(json){
+		$("#ajaxHtml").html(json.data.email);
+	};
+	
 	$(document).ready(function(){
+		var url = "http://127.0.0.1:7080/trpm-web/api/app/authByToken?token=1d7739b8-5752-47a7-8141-b181cfaa4615";
+		
+		$.getJSON(url+"&jsoncallback=?",function(){});
+		/*
 		$.ajaxRequest({
-			url:"http://a3-t.vipkid.com.cn/api/app/authByToken?token=1d7739b8-5752-47a7-8141-b181cfaa4615",
+			url:url,
 			type:"GET",
 			dataType:"jsonp",
+			jsonp:"angularfun",
 			success:function(json){
-				$("#ajaxHtml").html(json);
+				$("#ajaxHtml").html(json.data.email);
 			},
 			error:function(){
 				
 			}
 		});
+		*/
 	});
 </script>
 </head>
