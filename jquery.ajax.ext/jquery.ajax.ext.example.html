@@ -13,7 +13,7 @@
 	$(document).ready(function(){
 		var url = "http://127.0.0.1:7080/trpm-web/api/app/authByToken?token=1d7739b8-5752-47a7-8141-b181cfaa4615";
 		
-		$.getJSON(url+"&jsoncallback=?",function(){});
+		//$.getJSON(url+"&jsoncallback=?",function(){});
 		/*
 		$.ajaxRequest({
 			url:url,
@@ -28,6 +28,17 @@
 			}
 		});
 		*/
+		$.ajaxRequest({
+			url:url,
+			type:"GET",
+			dataType:'json',
+			success:function(json){
+				$("#ajaxHtml").html(json.data.email);
+			},
+			error:function(){
+			}
+		});
+
 	});
 </script>
 </head>
